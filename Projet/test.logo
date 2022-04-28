@@ -1,0 +1,40 @@
+print "Bonjour ""univers""!";
+println;
+
+i = 30;
+estPair = true;
+while i < 50 do
+  print "Le nombre " + i + " ";
+  if !estPair then
+    print "n'";
+  end
+  print "est ";
+  if !estPair then
+    print "pas ";
+  end
+  print "pair.";
+  println;
+
+  i = i + 2;
+  estPair = !estPair;
+end
+
+println;
+
+a = 10;
+b = 20;
+c = 10;
+d = 20;
+
+construire_frame 1000,500;
+deplacer_pointeur 250,882;
+deplacer_pointeur 250,182;
+deplacer_pointeur 154,182;
+deplacer_pointeur 200,200;
+dessiner_ligne 300,300;
+dessiner_ligne 400,200;
+dessiner_ligne 300,100;
+dessiner_ligne 200,200;
+deplacer_pointeur 50,10;
+dessiner_ligne 70,55;
+

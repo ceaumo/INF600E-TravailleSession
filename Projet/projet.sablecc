@@ -1,0 +1,91 @@
+Package projet.syntax;
+
+Helpers
+  digit = ['0'..'9'];
+  letter = [['a'..'z']+['A'..'Z']];
+
+  // Caractères permis dans les chaînes:
+  // ASCII du code 32 à 126 sauf le " qui peut être échappé en le doublant en ""
+  string_char = [[32..126] - '"'] | '"' '"';
+
+Tokens
+
+  plus = '+';
+  minus = '-';
+  assign = '=';
+  sc = ';';
+
+  // Nouveaux jetons
+  eq = '=='; // equal
+  lt = '<';  // less than
+  gt = '>';  // greater than
+  not = '!';
+  l_par = '(';
+  r_par = ')';
+  comma = ',';
+
+  print = 'print';
+  println = 'println';
+  true = 'true';
+  false = 'false';
+  if = 'if';
+  then = 'then';
+  end = 'end';
+  while = 'while';
+  do = 'do';
+  construire_frame = 'construire_frame';
+  deplacer_pointeur = 'deplacer_pointeur';
+  dessiner_ligne = 'dessiner_ligne';
+
+  ident = letter (letter | digit)*;
+  number = digit+;
+  blank = ' ' | 13 | 10 | 9;
+  string = '"' string_char* '"';
+
+Ignored Tokens
+  blank;
+
+Productions
+  program = [instrs]:instr*;
+
+  instr =
+    {assign} ident assign exp sc |
+    {print} print exp sc |
+    {println} println sc |
+    {if} if exp then block end |
+    {construire_frame} construire_frame [left]:number comma [right]:number sc|
+    {deplacer_pointeur} deplacer_pointeur [left]:number comma [right]:number sc|
+    {dessiner_ligne} dessiner_ligne [left]:number comma [right]:number sc|
+    {while} while exp do block end;
+
+
+  block = [instrs]:instr*;
+
+  // Ajouts de nouvelles expressions
+  // Les expressions sont découpées en plusieurs productions afin d'introduire des priorités
+
+  exp =
+    {eq} [left]:exp eq [right]:sum |
+    {lt} [left]:exp lt [right]:sum |
+    {gt} [left]:exp gt [right]:sum |
+    {simple} sum;
+
+  sum =
+    {add} [left]:sum plus [right]:neg |
+    {sub} [left]:sum minus [right]:neg |
+    {simple} neg;
+
+  neg =
+    {not} not [exp]:neg |
+    {term} term;
+
+  term =
+    {number} number |
+    {var} ident |
+    {true} true |
+    {false} false |
+
+   // Nouvelles alternatives
+
+    {par} l_par exp r_par |
+    {string} string;
