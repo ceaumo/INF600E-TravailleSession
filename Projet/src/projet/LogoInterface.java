@@ -19,6 +19,11 @@ public class LogoInterface extends  JFrame{
             for (Ligne ligne :this.lignes) {
                 g.drawLine(ligne.point_origine.x,ligne.point_origine.y,
                         ligne.point_destination.x,ligne.point_destination.y);
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 //System.out.println( "Here "+ ligne.point_origine.x);
             }
 
@@ -36,8 +41,6 @@ public class LogoInterface extends  JFrame{
         this.setBackground(Color.WHITE);
 
         //this.pointeur.setBounds((width/2),(height/2), 10, 10);
-
-
         this.setSize(width,height);
         this.setLayout(null);
         this.setVisible(true);

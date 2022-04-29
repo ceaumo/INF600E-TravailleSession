@@ -1,9 +1,11 @@
 package projet;
 
 public class Pointeur {
+
     Point position;
 
     public Pointeur(){
+
         position = new Point(100,100);
     }
 
