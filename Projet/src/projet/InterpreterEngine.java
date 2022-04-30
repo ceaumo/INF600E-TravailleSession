@@ -1,13 +1,10 @@
-
 package projet;
 
 import projet.syntax.analysis.DepthFirstAdapter;
 import projet.syntax.node.*;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -15,109 +12,52 @@ public class InterpreterEngine
         extends DepthFirstAdapter {
 
     private Map<String, Value> variables = new HashMap<>();
-
     private Value result;
-   // private JFrame f =new JFrame();
-   // private JLabel pointeur = new JLabel("x");
     private LogoInterface interface_logo = new LogoInterface();
 
 
+    @Override
+    public void caseAChangerCouleurInstr(AChangerCouleurInstr node) {
+        String couleur = node.getString().getText();
+        String color2 = couleur.substring(1,couleur.length()-1);
+        this.interface_logo.setCouleur(Ligne.getCouleur(color2));
+    }
 
+    @Override
+    public void caseAChangerEpaisseurInstr(AChangerEpaisseurInstr node) {
+        int epaisseur = Integer.parseInt(node.getNumber().getText());
+        this.interface_logo.setThickness(epaisseur);
+    }
 
     @Override
     public void caseAConstruireFrameInstr(AConstruireFrameInstr node) {
         int width = Integer.parseInt(node.getLeft().getText());
         int height = Integer.parseInt(node.getRight().getText());
-        this.interface_logo.setFrameDimention(width,height);
-
-        System.out.println("left is "+width);
-        System.out.println(" right  is "+ height);
-
-
+        this.interface_logo.setFrameDimention(width, height);
     }
 
     @Override
     public void caseADeplacerPointeurInstr(ADeplacerPointeurInstr node) {
-        System.out.println(this.interface_logo.informations_pointeur());
-        // Value val_left = eval(node.getLeft());
-        // Value val_right = eval(node.getRight());
-        // int x_destination = val_left.hashCode();
-        // int y_destination = val_right.hashCode();
-        PArgs t = node.getObject();
-        ArrayList<String> PArgsList = new ArrayList<>(Arrays.asList(t.toString().split(",")));
-        
-        int x_destination = Integer.parseInt(PArgsList.get(0).trim());
-        int y_destination = Integer.parseInt(PArgsList.get(1).trim());
-        this.interface_logo.deplacer_pointeur(x_destination,y_destination);
-        System.out.println(this.interface_logo.informations_pointeur());
+        Value val_left = eval(node.getLeft());
+        Value val_right = eval(node.getRight());
+        int x_destination = val_left.hashCode();
+        int y_destination = val_right.hashCode();
+        this.interface_logo.deplacer_pointeur(x_destination, y_destination);
     }
 
 
     @Override
     public void caseADessinerLigneInstr(ADessinerLigneInstr node) {
-        PArgs t = node.getObject();
-        System.out.println("PArgs = " + t.toString());
-        ArrayList<String> PArgsList = new ArrayList<>(Arrays.asList(t.toString().split(",")));
-        System.out.println("PArgs = " + PArgsList.get(0));
-        
-        //Value val_left = eval(node.getLeft());
-        //Value val_right = eval(node.getRight());
-        //int x_destination = val_left.hashCode();
-        //int y_destination = val_right.hashCode();
-        Color couleur = getCouleur(PArgsList.get(0).trim().toString());
-        float thickness = Float.parseFloat(PArgsList.get(1).trim());
-        int x_destination = Integer.parseInt(PArgsList.get(2).trim());
-        int y_destination = Integer.parseInt(PArgsList.get(3).trim());
-        Point point_ori = new Point(x_destination,y_destination);
-        Point point_dest = new Point(this.interface_logo.get_pointeur_position_actuelle().getPosition().x,
-                this.interface_logo.get_pointeur_position_actuelle().getPosition().y);
-        Ligne ligne = new Ligne(point_ori, point_dest, thickness, couleur);
-        this.interface_logo.deplacer_pointeur(x_destination,y_destination);
+        Value val_left = eval(node.getLeft());
+        Value val_right = eval(node.getRight());
+        int x_destination = val_left.hashCode();
+        int y_destination = val_right.hashCode();
+        Point point_ori = new Point(x_destination, y_destination);
+        Point point_dest = new Point(this.interface_logo.get_pointeur_position_actuelle().getPosition().getX(),
+                this.interface_logo.get_pointeur_position_actuelle().getPosition().getY());
+        Ligne ligne = new Ligne(point_ori, point_dest,this.interface_logo.getThickness(), this.interface_logo.getCouleur());
+        this.interface_logo.deplacer_pointeur(x_destination, y_destination);
         this.interface_logo.add_ligne(ligne);
-    }
-
-    public static Color getCouleur(String couleur){
-        Color codeCouleur = null;
-        switch(couleur){
-            case "noir":
-                codeCouleur = Color.BLACK;
-                break;
-            case "bleu":
-                codeCouleur = Color.BLUE;
-                break;
-            case "rouge":
-                codeCouleur = Color.RED;
-                break;
-            case "jaune":
-                codeCouleur = Color.YELLOW;
-                break;
-            case "cyan":
-                codeCouleur = Color.CYAN;
-                break;
-            case "gris":
-                codeCouleur = Color.GRAY;
-                break;
-            case "vert":
-                codeCouleur = Color.GREEN;
-                break;
-            case "magenta":
-                codeCouleur = Color.MAGENTA;
-                break;
-            case "orange":
-                codeCouleur = Color.ORANGE;
-                break;
-            case "rose":
-                codeCouleur = Color.PINK;
-                break;
-            case "gris_fonce":
-                codeCouleur = Color.DARK_GRAY;
-                break;
-            case "gris_pale":
-                codeCouleur = Color.LIGHT_GRAY;
-                break;
-        }
-
-        return codeCouleur;
     }
 
     public void visit(
@@ -131,13 +71,13 @@ public class InterpreterEngine
             Node node) {
 
         if (this.result != null) {
-            // throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
+            throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
         }
 
         visit(node);
 
         if (this.result == null) {
-            // throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
+            throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
         }
 
         Value result = this.result;
@@ -185,8 +125,6 @@ public class InterpreterEngine
     }
 
 
-
-
     @Override
     public void caseAAssignInstr(
             AAssignInstr node) {
@@ -218,7 +156,6 @@ public class InterpreterEngine
             visit(node.getBlock());
         }
     }
-
 
 
     @Override
@@ -256,9 +193,6 @@ public class InterpreterEngine
         int right = getNumberRight(eval(node.getLeft()), node.getGt());
         this.result = BoolValue.get(left > right);
     }
-
-
-
 
 
     @Override
@@ -306,8 +240,7 @@ public class InterpreterEngine
         try {
             this.result = new IntValue(
                     Integer.parseInt(node.getNumber().getText()));
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new InterpreterException(node.getNumber(),
                     "Le nombre indiqué est trop grand.");
         }
@@ -353,4 +286,3 @@ public class InterpreterEngine
         this.result = new StringValue(text);
     }
 }
-

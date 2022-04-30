@@ -38,6 +38,9 @@ Tokens
   construire_frame = 'construire_frame';
   deplacer_pointeur = 'deplacer_pointeur';
   dessiner_ligne = 'dessiner_ligne';
+  changer_couleur = 'changer_couleur';
+  changer_epaisseur = 'changer_epaisseur';
+
 
   ident = letter (letter | digit)*;
   number = digit+;
@@ -57,8 +60,13 @@ Productions
     {println} println sc |
     {if} if exp then block end |
     {construire_frame} construire_frame [left]:number comma [right]:number sc|
-    {deplacer_pointeur} deplacer_pointeur [object]: args? sc|
-    {dessiner_ligne} dessiner_ligne [object]: args? sc|
+    //{deplacer_pointeur} deplacer_pointeur [object]: args? sc|
+    //{dessiner_ligne} dessiner_ligne [object]: args? sc|
+
+    {deplacer_pointeur} deplacer_pointeur [left]:term comma [right]:term sc|
+    {dessiner_ligne} dessiner_ligne [left]:term comma [right]:term sc|
+    {changer_couleur} changer_couleur string sc|
+    {changer_epaisseur} changer_epaisseur number sc|
     {while} while exp do block end;
 
 
@@ -92,12 +100,12 @@ Productions
 
     {par} l_par exp r_par |
     {string} string;
-  
+
   args =
     arg [additional_arg]:additional_arg*;
-    
+
   additional_arg =
     comma arg;
-    
+
   arg =
     exp;

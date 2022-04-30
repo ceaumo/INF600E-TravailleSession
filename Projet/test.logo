@@ -21,23 +21,31 @@ end
 
 println;
 
-a = 10;
-b = 20;
-c = 10;
-d = 20;
 
-# les couleurs fonctionelles sont les suivantes : 
-# noir, bleu, rouge, jaune, cyan, gris, vert, magenta, orange, rose, gris_fonce, gris_pale
+
 
 construire_frame 1000,500;
-deplacer_pointeur 250,882;
-deplacer_pointeur 250,182;
-deplacer_pointeur 154,182;
-deplacer_pointeur 200,200;
-dessiner_ligne bleu,10,300,300;
-dessiner_ligne bleu,8,400,200;
-dessiner_ligne noir,2,300,100;
-dessiner_ligne rouge,10,200,200;
-deplacer_pointeur 50,10;
-dessiner_ligne jaune,1,70,55;
+changer_couleur "vert";
+a = 200;
+while a < 300 do
+    dessiner_ligne (a+10),(a+20);
+    dessiner_ligne a,(a+40);
+    dessiner_ligne (a+20),(a+30);
+    dessiner_ligne (a+40),(a+40);
+    dessiner_ligne (a+30),(a+20);
+    dessiner_ligne (a+40),a;
+    dessiner_ligne (a+20),(a+10);
+    dessiner_ligne a,a;
+    a = a+10;
+end
 
+deplacer_pointeur 200,200;
+dessiner_ligne 300,300;
+changer_couleur "vert";
+dessiner_ligne 400,200;
+changer_couleur "bleu";
+dessiner_ligne 300,100;
+changer_epaisseur 5;
+changer_couleur "rouge";
+dessiner_ligne 500,100;
+deplacer_pointeur 50,10;
