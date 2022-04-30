@@ -7,6 +7,8 @@ Helpers
   // Caractères permis dans les chaînes:
   // ASCII du code 32 à 126 sauf le " qui peut être échappé en le doublant en ""
   string_char = [[32..126] - '"'] | '"' '"';
+  eol = 13 | 10 | 13 10;
+  char = [32..126];
 
 Tokens
 
@@ -41,9 +43,10 @@ Tokens
   number = digit+;
   blank = ' ' | 13 | 10 | 9;
   string = '"' string_char* '"';
+  comment = '#' char* eol;
 
 Ignored Tokens
-  blank;
+  blank, comment;
 
 Productions
   program = [instrs]:instr*;
@@ -54,8 +57,8 @@ Productions
     {println} println sc |
     {if} if exp then block end |
     {construire_frame} construire_frame [left]:number comma [right]:number sc|
-    {deplacer_pointeur} deplacer_pointeur [left]:number comma [right]:number sc|
-    {dessiner_ligne} dessiner_ligne [left]:number comma [right]:number sc|
+    {deplacer_pointeur} deplacer_pointeur [object]: args? sc|
+    {dessiner_ligne} dessiner_ligne [object]: args? sc|
     {while} while exp do block end;
 
 
@@ -89,3 +92,12 @@ Productions
 
     {par} l_par exp r_par |
     {string} string;
+  
+  args =
+    arg [additional_arg]:additional_arg*;
+    
+  additional_arg =
+    comma arg;
+    
+  arg =
+    exp;

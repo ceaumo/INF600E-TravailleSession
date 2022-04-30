@@ -16,8 +16,12 @@ public class LogoInterface extends  JFrame{
 
         @Override
         public void paint(Graphics g){
+            super.paintComponents(g);
+            Graphics2D g2 = (Graphics2D) g;
             for (Ligne ligne :this.lignes) {
-                g.drawLine(ligne.point_origine.x,ligne.point_origine.y,
+                g2.setColor(ligne.point_couleur);
+                g2.setStroke(new BasicStroke(ligne.point_thickness));
+                g2.drawLine(ligne.point_origine.x,ligne.point_origine.y,
                         ligne.point_destination.x,ligne.point_destination.y);
                 try {
                     Thread.sleep(200);

@@ -4,6 +4,9 @@ package projet;
 import projet.syntax.analysis.DepthFirstAdapter;
 import projet.syntax.node.*;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,8 +39,15 @@ public class InterpreterEngine
     @Override
     public void caseADeplacerPointeurInstr(ADeplacerPointeurInstr node) {
         System.out.println(this.interface_logo.informations_pointeur());
-        int x_destination = Integer.parseInt(node.getLeft().getText());
-        int y_destination = Integer.parseInt(node.getRight().getText());
+        // Value val_left = eval(node.getLeft());
+        // Value val_right = eval(node.getRight());
+        // int x_destination = val_left.hashCode();
+        // int y_destination = val_right.hashCode();
+        PArgs t = node.getObject();
+        ArrayList<String> PArgsList = new ArrayList<>(Arrays.asList(t.toString().split(",")));
+        
+        int x_destination = Integer.parseInt(PArgsList.get(0).trim());
+        int y_destination = Integer.parseInt(PArgsList.get(1).trim());
         this.interface_logo.deplacer_pointeur(x_destination,y_destination);
         System.out.println(this.interface_logo.informations_pointeur());
     }
@@ -45,14 +55,69 @@ public class InterpreterEngine
 
     @Override
     public void caseADessinerLigneInstr(ADessinerLigneInstr node) {
-        int x_destination = Integer.parseInt(node.getLeft().getText());
-        int y_destination = Integer.parseInt(node.getRight().getText());
+        PArgs t = node.getObject();
+        System.out.println("PArgs = " + t.toString());
+        ArrayList<String> PArgsList = new ArrayList<>(Arrays.asList(t.toString().split(",")));
+        System.out.println("PArgs = " + PArgsList.get(0));
+        
+        //Value val_left = eval(node.getLeft());
+        //Value val_right = eval(node.getRight());
+        //int x_destination = val_left.hashCode();
+        //int y_destination = val_right.hashCode();
+        Color couleur = getCouleur(PArgsList.get(0).trim().toString());
+        float thickness = Float.parseFloat(PArgsList.get(1).trim());
+        int x_destination = Integer.parseInt(PArgsList.get(2).trim());
+        int y_destination = Integer.parseInt(PArgsList.get(3).trim());
         Point point_ori = new Point(x_destination,y_destination);
         Point point_dest = new Point(this.interface_logo.get_pointeur_position_actuelle().getPosition().x,
                 this.interface_logo.get_pointeur_position_actuelle().getPosition().y);
-        Ligne ligne = new Ligne(point_ori, point_dest);
+        Ligne ligne = new Ligne(point_ori, point_dest, thickness, couleur);
         this.interface_logo.deplacer_pointeur(x_destination,y_destination);
         this.interface_logo.add_ligne(ligne);
+    }
+
+    public static Color getCouleur(String couleur){
+        Color codeCouleur = null;
+        switch(couleur){
+            case "noir":
+                codeCouleur = Color.BLACK;
+                break;
+            case "bleu":
+                codeCouleur = Color.BLUE;
+                break;
+            case "rouge":
+                codeCouleur = Color.RED;
+                break;
+            case "jaune":
+                codeCouleur = Color.YELLOW;
+                break;
+            case "cyan":
+                codeCouleur = Color.CYAN;
+                break;
+            case "gris":
+                codeCouleur = Color.GRAY;
+                break;
+            case "vert":
+                codeCouleur = Color.GREEN;
+                break;
+            case "magenta":
+                codeCouleur = Color.MAGENTA;
+                break;
+            case "orange":
+                codeCouleur = Color.ORANGE;
+                break;
+            case "rose":
+                codeCouleur = Color.PINK;
+                break;
+            case "gris_fonce":
+                codeCouleur = Color.DARK_GRAY;
+                break;
+            case "gris_pale":
+                codeCouleur = Color.LIGHT_GRAY;
+                break;
+        }
+
+        return codeCouleur;
     }
 
     public void visit(
@@ -66,13 +131,13 @@ public class InterpreterEngine
             Node node) {
 
         if (this.result != null) {
-            throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
+            // throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
         }
 
         visit(node);
 
         if (this.result == null) {
-            throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
+            // throw new RuntimeException("Erreur inattendue dans l'intérpéteur.");
         }
 
         Value result = this.result;

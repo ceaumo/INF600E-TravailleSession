@@ -18,12 +18,13 @@ public class Main {
             String[] args) {
 
         // Vérification de l'argument
-        if (args.length != 1) {
+        /* if (args.length != 1) {
             System.err.println("USAGE: java main.java fichier.logo");
             System.exit(1);
         }
 
-        String filename = args[0];
+        String filename = args[0]; */
+        String filename = "/Users/jdnadeau/uni/INF600E/travailSession/INF600E-TravailleSession/Projet/test.logo";
         if (!filename.endsWith(".logo")) {
             System.err.println("ERREUR: Le fichier \"" + filename
                     + "\" n'a pas le suffixe \".logo\".");
