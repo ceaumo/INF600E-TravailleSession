@@ -1,0 +1,16 @@
+construire_frame 1000,500;
+changer_couleur "bleu";
+changer_epaisseur 2;
+a = 200;
+deplacer_pointeur 200,200;
+while a < 300 do
+    dessiner_ligne (a+10),(a+20);
+    dessiner_ligne a,(a+40);
+    dessiner_ligne (a+20),(a+30);
+    dessiner_ligne (a+40),(a+40);
+    dessiner_ligne (a+30),(a+20);
+    dessiner_ligne (a+40),a;
+    dessiner_ligne (a+20),(a+10);
+    dessiner_ligne a,a;
+    a = a+10;
+end

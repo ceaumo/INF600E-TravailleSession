@@ -11,9 +11,6 @@ public class LogoInterface extends  JFrame{
     private Pointeur pointeur = new Pointeur();
     private ArrayList<Ligne> lignes = new ArrayList<>();
     private Color couleur;
-
-
-
     private int thickness;
 
 
@@ -27,24 +24,19 @@ public class LogoInterface extends  JFrame{
     public void paint(Graphics g){
         super.paintComponents(g);
         Graphics2D g2 = (Graphics2D) g;
-        System.out.println(this.lignes.size());
         for (Ligne ligne :this.lignes) {
             g2.setStroke(new BasicStroke(ligne.getThickness()));
             g2.setColor(ligne.getCouleur());
-            System.out.println(this.getCouleur());
             g2.drawLine(ligne.getPoint_origine().getX(),ligne.getPoint_origine().getY(),
                     ligne.getPoint_destination().getX(),ligne.getPoint_destination().getY());
             try {
-                Thread.sleep(200);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //System.out.println( "Here "+ ligne.point_origine.x);
         }
 
     }
-
-
 
 
 
@@ -54,16 +46,12 @@ public class LogoInterface extends  JFrame{
         this.setResizable(false);
         this.setTitle("Logo app");
         this.setBackground(Color.WHITE);
-
-        //this.pointeur.setBounds((width/2),(height/2), 10, 10);
         this.setSize(width,height);
         this.setLayout(null);
         this.setVisible(true);
     }
 
     public void deplacer_pointeur(int new_x,int new_y){
-        Point position_actuelle = this.pointeur.getPosition();
-        System.out.println(new_x +" "+ new_y);
         Point new_position = new Point(new_x,new_y);
         this.pointeur.setPosition(new_position);
 

@@ -1,0 +1,36 @@
+construire_frame 1000,500;
+changer_couleur "jaune";
+changer_epaisseur 2;
+a = 500;
+deplacer_pointeur 500,200;
+
+
+changer_couleur "jaune";
+a = 200;
+deplacer_pointeur 250,250;
+cont = 1;
+while a < 250 do
+    dessiner_ligne (a+(100-cont)),(a+cont);
+    dessiner_ligne (a-(100+cont)),(a+cont);
+    a = a+1;
+    cont = cont +1;
+end
+
+changer_couleur "bleu";
+a = 250;
+while a < 280 do
+    dessiner_ligne (a+(100-cont)),(a+cont);
+    dessiner_ligne (a-(100+cont)),(a+cont);
+    a = a+1;
+    cont = cont +1;
+end
+
+changer_couleur "rouge";
+a = 280;
+
+while a < 310 do
+    dessiner_ligne (a+(100-cont)),(a+cont);
+    dessiner_ligne (a-(100+cont)),(a+cont);
+    a = a+1;
+    cont = cont +1;
+end

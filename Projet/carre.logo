@@ -1,0 +1,22 @@
+construire_frame 900,500;
+changer_couleur "bleu";
+changer_epaisseur 2;
+a = 420;
+b = 230;
+c = 430;
+d = 220;
+cont = 100;
+point = 10;
+deplacer_pointeur 420,220;
+while cont < 290 do
+    dessiner_ligne a,b;
+    dessiner_ligne c,b;
+    dessiner_ligne c,d;
+    dessiner_ligne a,d;
+    d = d -10;
+    a = a - 10;
+    c = c +10;
+    deplacer_pointeur a,d;
+    b = b + 10;
+    cont = cont + 10;
+end

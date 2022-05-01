@@ -4,6 +4,17 @@ import java.awt.Color;
 
 public class Ligne {
     private Point point_origine;
+    private Point point_destination;
+    private float thickness;
+    private Color couleur;
+
+
+    public Ligne(Point point_origine, Point point_destination, float thickness, Color couleur) {
+        this.point_origine = point_origine;
+        this.point_destination = point_destination;
+        this.thickness = thickness;
+        this.couleur = couleur;
+    }
 
     public Point getPoint_origine() {
         return point_origine;
@@ -34,18 +45,6 @@ public class Ligne {
     }
 
     public void setCouleur(Color couleur) {
-        this.couleur = couleur;
-    }
-
-    private Point point_destination;
-    // Epaisseur du trait
-    private float thickness;
-    private Color couleur;
-
-    public Ligne(Point point_origine, Point point_destination, float thickness, Color couleur) {
-        this.point_origine = point_origine;
-        this.point_destination = point_destination;
-        this.thickness = thickness;
         this.couleur = couleur;
     }
 
