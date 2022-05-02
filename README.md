@@ -4,14 +4,14 @@ Le langage, qui se nomme Leia, sert à dessiner des traits et donc, des formes p
 
 ## Description
 
-Ce langage sert à dessiner des traits de la grosseur souhaitée et de la couleurs souhaitée à la position souhaité.
+Ce langage de dessin sert à dessiner des traits de la grosseur souhaitée et de la couleur souhaitée à la position souhaitée.
 Leia sert à dessiner des formes à l'écran.
 
 ## Commencement
 
 ### Dépendances
 
-Voici les prérequis et les librairies à installer :
+Voici les prérequis et les librairies à installer pour faire fonctionner ce projet :
 * Java
 * SableCC
 * Java Swing
@@ -36,15 +36,15 @@ Il faut que la syntaxe de ce projet, le répertoire `syntax`, soit à cet endroi
 
 ### Exécution du programme
 
-Pour faire rouler le programme, veuillez faire la commande qui suit : 
+Pour faire rouler le programme, veuillez ouvrir le projet dans votre IDE favori et exécuter-le. Vous devez prendre en argument un fichier avec l'extension `logo`, par exemple, `drapeau.logo`. Vous pouvez aussi faire roulez la commande qui suit, sous le répertoire `Projet`, dans un terminal : 
 
 ```
-java
+javac Projet/src/projet/Main.java && java Main drapeau.logo
 ```
 
 Aussi, vous pouvez remplacer le fichier `drapeau.logo` par un des autres fichiers avec l'extension logo qui se trouve dans notre projet.
 
-Les fichiers de tests sont `etoile.logo`, `drapeau.logo`, `carree.logo` et `pyramide.logo`.
+Les fichiers de tests sont `etoile.logo`, `drapeau.logo`, `carree.logo`, `pyramide.logo` et `rectangle.logo`.
 
 ## Aide
 
