@@ -4,10 +4,7 @@ public class Pointeur {
 
     Point position;
 
-    public Pointeur(){
-
-        position = new Point(100,100);
-    }
+    public Pointeur(){}
 
     public Point getPosition() {
         return position;

@@ -30,7 +30,7 @@ public class LogoInterface extends  JFrame{
             g2.drawLine(ligne.getPoint_origine().getX(),ligne.getPoint_origine().getY(),
                     ligne.getPoint_destination().getX(),ligne.getPoint_destination().getY());
             try {
-                Thread.sleep(20);
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -44,11 +44,14 @@ public class LogoInterface extends  JFrame{
         this.frameInit();
         this.setDefaultCloseOperation(3);
         this.setResizable(false);
-        this.setTitle("Logo app");
+        this.setTitle("Leia app");
         this.setBackground(Color.WHITE);
         this.setSize(width,height);
         this.setLayout(null);
         this.setVisible(true);
+        Point position_initial = new Point(width/2,height/2);
+        this.pointeur.setPosition(position_initial);
+
     }
 
     public void deplacer_pointeur(int new_x,int new_y){

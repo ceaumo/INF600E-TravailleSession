@@ -1,0 +1,57 @@
+construire_frame 800,400;
+changer_couleur "rouge";
+changer_epaisseur 6;
+a = 200;
+deplacer_pointeur 200,200;
+dessiner_ligne 200,300;
+
+changer_couleur "bleu";
+dessiner_ligne 250,300;
+
+changer_couleur "vert";
+deplacer_pointeur 300,200;
+dessiner_ligne 300,300;
+
+changer_couleur "gris";
+deplacer_pointeur 300,250;
+dessiner_ligne 350,250;
+
+changer_couleur "jaune";
+deplacer_pointeur 300,200;
+dessiner_ligne 350,200;
+
+changer_couleur "orange";
+deplacer_pointeur 300,300;
+dessiner_ligne 350,300;
+
+deplacer_pointeur 400,200;
+changer_couleur "magenta";
+dessiner_ligne 400,300;
+
+deplacer_pointeur 450,200;
+changer_couleur "cyan";
+dessiner_ligne 450,300;
+
+deplacer_pointeur 450,200;
+changer_couleur "bleu";
+dessiner_ligne 500,200;
+
+changer_couleur "rouge";
+dessiner_ligne 500,300;
+
+deplacer_pointeur 450,250;
+changer_couleur "noir";
+dessiner_ligne 500,250;
+
+deplacer_pointeur 100,100;
+changer_epaisseur 3;
+changer_couleur "rose";
+a = 100;
+    dessiner_ligne (a+10),(a+20);
+    dessiner_ligne a,(a+40);
+    dessiner_ligne (a+20),(a+30);
+    dessiner_ligne (a+40),(a+40);
+    dessiner_ligne (a+30),(a+20);
+    dessiner_ligne (a+40),a;
+    dessiner_ligne (a+20),(a+10);
+    dessiner_ligne a,a;
